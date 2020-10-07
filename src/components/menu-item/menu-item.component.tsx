@@ -1,10 +1,14 @@
-import React from 'react'
-import { ImenuItemProps } from './menu-item-types'
-import './menu-item.styles.scss'
+import React from 'react';
+import { ImenuItemProps } from '../../data-types/menu-item-types';
+import './menu-item.styles.scss';
+import { useHistory } from 'react-router'
 
-const MenuItem: React.FC<ImenuItemProps> = ({ title, imageUrl, size }) => {
+const MenuItem: React.FC<ImenuItemProps> = ({ title, imageUrl, size, linkUrl }) => {
+    const history = useHistory();
+    console.log(linkUrl)
+
     return (
-        <div className={`${size} menu-item`}>
+        <div className={`${size} menu-item`} onClick={() => history.push(linkUrl)}>
             <div
                 style={{
                     backgroundImage: `url(${imageUrl})`

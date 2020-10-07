@@ -1,0 +1,26 @@
+import React from 'react'
+
+import './collection-preview.styles.scss';
+
+import { ICollectionPreviewProps } from '../../data-types/collection-preview-types';
+import CollectionItem from './../collection-item/collection-item.component';
+
+const CollectionPreview: React.FC<ICollectionPreviewProps> = ({ title, items }) => {
+
+    return (
+        <div className="collection-preview">
+            <h1 className="title">{title.toUpperCase()}</h1>
+            <div className="preview">
+                {items
+                    .filter((item, index) => index < 4)
+                    .map(({ id, ...otherItemsProps }) => {
+                        return (
+                            <CollectionItem key={id} id={id} {...otherItemsProps} />
+                        )
+                    })}
+            </div>
+        </div>
+    )
+}
+
+export default CollectionPreview;
