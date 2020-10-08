@@ -7,6 +7,8 @@ import { ISignIn, SignDefault } from '../../data-types/Form-types';
 import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
 
+import { signInWithGoogle } from '../../firebase/firebase.utils';
+
 const SignIn: React.FC = () => {
     const [signInForm, setsignInForm] = useState<ISignIn>(SignDefault);
 
@@ -43,8 +45,14 @@ const SignIn: React.FC = () => {
                     value={signInForm.password}
                     label="Password"
                     required />
+                <div className="buttons">
+                    <CustomButton type="submit">Sign In</CustomButton>
+                    <CustomButton onClick={signInWithGoogle} isGoogleSignIn>
+                        {' '}
+                    Sign in with Google{' '}
+                    </CustomButton>
+                </div>
 
-                <CustomButton type="submit">Sign In</CustomButton>
             </form>
         </div>
     )

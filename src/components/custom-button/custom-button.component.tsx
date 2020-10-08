@@ -4,9 +4,12 @@ import './custom-button.styles.scss';
 
 import { ICustomButtonProps } from '../../data-types/custom-button-types';
 
-const CustomButton: React.FC<ICustomButtonProps> = ({ children, ...otherProps }) => {
+const CustomButton: React.FC<ICustomButtonProps> = ({ children, onClick, isGoogleSignIn, ...otherProps }) => {
+
     return (
-        <button className="custom-button">
+        <button
+            className={`${isGoogleSignIn ? 'google-sign-in' : ''} custom-button`}
+            onClick={onClick}>
             {children}
         </button>
     )
