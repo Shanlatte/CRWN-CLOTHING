@@ -43,7 +43,6 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
             console.log('error creating user ', err.message);
         }
     }
-    console.log(userRef)
     return userRef;
 }
 

@@ -7,13 +7,21 @@ import { ISignIn, SignDefault } from '../../data-types/Form-types';
 import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
 
-import { signInWithGoogle } from '../../firebase/firebase.utils';
+import { auth, signInWithGoogle } from '../../firebase/firebase.utils';
 
 const SignIn: React.FC = () => {
     const [signInForm, setsignInForm] = useState<ISignIn>(SignDefault);
 
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+
+        const { email, password } = signInForm;
+
+        try {
+            await auth.signInWithEmailAndPassword(email, password)
+        } catch (err) {
+            console.log(err)
+        }
 
         setsignInForm({ ...SignDefault })
     }

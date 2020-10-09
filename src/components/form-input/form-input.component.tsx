@@ -4,14 +4,14 @@ import './form-input.styles.scss'
 
 import { IFormInputProps } from '../../data-types/Form-types';
 
-const FormInput: React.FC<IFormInputProps> = ({ handleChange, label, ...otherProps }) => {
+const FormInput: React.FC<IFormInputProps> = ({ handleChange, label, required, type, name, value, ...otherProps }) => {
     return (
 
         <div className="group">
-            <input className="form-input" onChange={handleChange} />
+            <input className="form-input" value={value} name={name} type={type} required={required} onChange={handleChange} />
             {
                 label ?
-                    (<label className={`${otherProps.value.length ? 'shrink' : ''} form-input-label`}>
+                    (<label className={`${value.length ? 'shrink' : ''} form-input-label`}>
                         {label}
                     </label>)
                     : null

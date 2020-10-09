@@ -8,6 +8,20 @@ export const SignDefault: ISignIn = {
     password: ''
 }
 
+export interface ISignUp {
+    displayName: string;
+    email: string;
+    password: string;
+    confirmPassword: string;
+}
+
+export const SignUpDefault: ISignUp = {
+    displayName: '',
+    email: '',
+    password: '',
+    confirmPassword: ''
+}
+
 export interface IFormInputProps {
     name: string;
     type: string;

@@ -11,24 +11,29 @@ import SignInAndSignUp from './pages/sign-in-and-sign-up/sign-in-and-sign-up.com
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 
 function App() {
-  const [currentUser, setCurrentUser] = useState();
+  const [currentUser, setCurrentUser] = useState(undefined);
+
+
 
   useEffect(() => {
-    auth.onAuthStateChanged(async userAuth => {
-      if (userAuth) {
-        const userRef = await createUserProfileDocument(userAuth);
-        userRef.onSnapshot(snapShot => {
-          const snap = {
-            id: snapShot.id,
-            ...snapShot.data()
-          }
-          setCurrentUser(snap);
-        });
-      } else {
-        setCurrentUser(null);
-      }
-    })
-  }, [])
+    if (currentUser === undefined) {
+      auth.onAuthStateChanged(async userAuth => {
+        if (userAuth) {
+          const userRef = await createUserProfileDocument(userAuth);
+          userRef.onSnapshot(snapShot => {
+            const snap = {
+              id: snapShot.id,
+              ...snapShot.data()
+            }
+            setCurrentUser(snap);
+          });
+        } else {
+          setCurrentUser(undefined);
+        }
+      })
+    }
+    console.log(currentUser)
+  }, [currentUser])
 
   return (
     <div >
