@@ -30,3 +30,11 @@ export interface IFormInputProps {
     required: boolean;
     label?: string;
 }
+
+export interface ISignUpProps {
+    handleForm: () => void;
+}
+
+export interface ISignInProps {
+    handleForm: () => void;
+}

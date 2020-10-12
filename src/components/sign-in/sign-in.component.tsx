@@ -3,13 +3,13 @@ import { useState } from 'react';
 
 import './sign-in.styles.scss'
 
-import { ISignIn, SignDefault } from '../../data-types/Form-types';
+import { ISignIn, SignDefault, ISignInProps } from '../../data-types/Form-types';
 import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
 
 import { auth, signInWithGoogle } from '../../firebase/firebase.utils';
 
-const SignIn: React.FC = () => {
+const SignIn: React.FC<ISignInProps> = ({ handleForm }) => {
     const [signInForm, setsignInForm] = useState<ISignIn>(SignDefault);
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -34,8 +34,11 @@ const SignIn: React.FC = () => {
 
     return (
         <div className="sign-in">
-            <h2>I already have an account</h2>
+            <h2>Sign In</h2>
+
             <span>Sign in with your email and password</span>
+            <span onClick={handleForm} style={{ color: "blue", cursor: "pointer" }}>I do not have an account</span>
+
 
             <form onSubmit={handleSubmit}>
                 <FormInput

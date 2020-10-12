@@ -7,15 +7,15 @@ import { auth, createUserProfileDocument } from '../../firebase/firebase.utils';
 
 import './sign-up.styles.scss';
 
-import { ISignUp, SignUpDefault } from '../../data-types/Form-types'
+import { ISignUp, SignUpDefault, ISignUpProps } from '../../data-types/Form-types'
 import { useState } from 'react';
 
-const SignUp: React.FC = () => {
+const SignUp: React.FC<ISignUpProps> = ({ handleForm }) => {
     const [signUpForm, setSignUpForm] = useState<ISignUp>(SignUpDefault);
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        console.log(signUpForm);
+        
         const { email, displayName, password, confirmPassword } = signUpForm
 
         if (password !== confirmPassword) {
@@ -41,9 +41,9 @@ const SignUp: React.FC = () => {
 
     return (
         <div className="sign-up">
-            <h2 className="title">I do not have an account</h2>
+            <h2 className="title">Sign Up</h2>
             <span>Sign up with your email and password</span>
-
+            <span onClick={handleForm} style={{ color: "blue", cursor: "pointer" }}>I already have an account</span>
             <form className="sign-up-form" onSubmit={handleSubmit}>
                 <FormInput
                     name="displayName"

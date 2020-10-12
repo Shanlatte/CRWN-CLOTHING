@@ -5,7 +5,6 @@ import { useHistory } from 'react-router'
 
 const MenuItem: React.FC<ImenuItemProps> = ({ title, imageUrl, size, linkUrl }) => {
     const history = useHistory();
-    console.log(linkUrl)
 
     return (
         <div className={`${size} menu-item`} onClick={() => history.push(linkUrl)}>
