@@ -11,6 +11,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setCurrentUser } from '../../redux/user/user.actions';
 import { RootState } from '../../redux/root-reducer';
 
+
 const Header: React.FC = () => {
     const currentUser = useSelector((state: RootState) => state.user.currentUser);
     const hiddenCart = useSelector((state: RootState) => state.cart.hidden);

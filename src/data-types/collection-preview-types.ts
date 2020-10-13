@@ -1,13 +1,24 @@
+
+// Props
 export interface ICollectionPreviewProps {
     title: string;
-    items: ICollectionItem[];
+    items: CollectionItem[];
     id: number;
     routeName: string;
 }
+export interface ICollectionItemProps {
+    item: CollectionItem;
+}
 
-export interface ICollectionItem {
+
+// Types
+interface CollectionItem {
     id: number;
     name: string;
     imageUrl: string;
-    price: number
+    price: number;
+}
+
+export interface ICartItemProps extends CollectionItem {
+    quantity: number
 }

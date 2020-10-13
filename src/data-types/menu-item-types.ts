@@ -1,3 +1,5 @@
+// Props
+
 export interface ImenuItemProps {
     title: string;
     imageUrl: string;

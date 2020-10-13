@@ -1,27 +1,5 @@
-export interface ISignIn {
-    email: string;
-    password: string;
-}
 
-export const SignDefault: ISignIn = {
-    email: '',
-    password: ''
-}
-
-export interface ISignUp {
-    displayName: string;
-    email: string;
-    password: string;
-    confirmPassword: string;
-}
-
-export const SignUpDefault: ISignUp = {
-    displayName: '',
-    email: '',
-    password: '',
-    confirmPassword: ''
-}
-
+// Props
 export interface IFormInputProps {
     name: string;
     type: string;
@@ -38,3 +16,29 @@ export interface ISignUpProps {
 export interface ISignInProps {
     handleForm: () => void;
 }
+
+// Types
+export interface ISignUp {
+    displayName: string;
+    email: string;
+    password: string;
+    confirmPassword: string;
+}
+
+export interface ISignIn {
+    email: string;
+    password: string;
+}
+// Forms types
+export const SignDefault: ISignIn = {
+    email: '',
+    password: ''
+}
+
+export const SignUpDefault: ISignUp = {
+    displayName: '',
+    email: '',
+    password: '',
+    confirmPassword: ''
+}
+
