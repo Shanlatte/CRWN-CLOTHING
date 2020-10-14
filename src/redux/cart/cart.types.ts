@@ -1,6 +1,8 @@
 //Constants
 export const TOGGLE_CART_HIDDEN = "TOGGLE_CART_HIDDEN";
 export const ADD_ITEM = "ADD_ITEM";
+export const REMOVE_ITEM = "REMOVE_ITEM";
+export const CLEAR_ITEM_FROM_CART = "CLEAR_ITEM_FROM_CART";
 
 //Cart State
 export interface CartState {
@@ -18,6 +20,17 @@ interface AddItem {
     payload: Item
 }
 
+interface RemoveItem {
+    type: typeof REMOVE_ITEM
+    payload: Item
+}
+
+interface ClearItemFromCart {
+    type: typeof CLEAR_ITEM_FROM_CART
+    payload: Item
+}
+
+//Types
 export interface Item {
     id: number;
     name: string;
@@ -29,4 +42,4 @@ export interface CartItem extends Item {
     quantity: number;
 }
 
-export type CartActionTypes = ToggleCartHiddenAction | AddItem;
+export type CartActionTypes = ToggleCartHiddenAction | AddItem | ClearItemFromCart | RemoveItem;
