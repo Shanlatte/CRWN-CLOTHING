@@ -2,9 +2,7 @@ import React from 'react';
 
 import StripeCheckout from 'react-stripe-checkout';
 
-interface IStripeCheckout {
-    price: number
-}
+import { IStripeCheckout } from '../../data-types/stripe-types'
 
 const StripeCheckoutButton: React.FC<IStripeCheckout> = ({ price }) => {
     const priceForStripe = price * 100;
