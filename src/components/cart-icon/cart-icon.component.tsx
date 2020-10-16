@@ -11,7 +11,6 @@ import { RootState } from '../../redux/root-reducer';
 const CartIcon: React.FC = () => {
     const itemCount: number = selectCartItemsCount(useSelector((state: RootState) => state));
     const dispatch = useDispatch();
-
     return (
         <div className='cart-icon' onClick={() => dispatch(toggleCartHidden())}>
             <img alt="cart" className="shopping-icon" src={require("../../assets/shopping-bag.svg")} />

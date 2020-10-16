@@ -15,25 +15,25 @@ import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up
 
 function App() {
   const currentUser = useSelector(state => state.user.currentUser);
+  var unsubscribeFromAuth = null;
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (currentUser === null) {
-      auth.onAuthStateChanged(async userAuth => {
-        if (userAuth) {
-          const userRef = await createUserProfileDocument(userAuth);
-          userRef.onSnapshot(snapShot => {
-            dispatch(setCurrentUser({
-              id: snapShot.id,
-              ...snapShot.data()
-            }));
-          });
-        } else {
-          setCurrentUser(null);
-        }
-      })
-    }
-  }, [currentUser, dispatch])
+    unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+      if (userAuth) {
+        const userRef = await createUserProfileDocument(userAuth);
+        userRef.onSnapshot(snapShot => {
+          dispatch(setCurrentUser({
+            id: snapShot.id,
+            ...snapShot.data()
+          }));
+        });
+      } else {
+        setCurrentUser(null);
+      }
+    })
+  }, [unsubscribeFromAuth])
+
 
   return (
     <div >
