@@ -260,6 +260,6 @@ type Collection = {
     items: CollectionItem[]
 }
 
-type ShopData = {
+export type ShopData = {
     [key: string]: Collection
 }

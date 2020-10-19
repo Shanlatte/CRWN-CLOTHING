@@ -19,7 +19,7 @@ const CollectionPage: React.FC<RouteComponentProps<TParams>> = ({ match }) => {
         <div className='collection-page'>
             <h2 className='title'>{collection?.title}</h2>
             <div className='items'>
-                {collection?.items.map(item => (
+                {collection?.items.map((item: any) => (
                     <CollectionItem key={item.id} item={item} />
                 ))}
             </div>
