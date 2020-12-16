@@ -6,7 +6,7 @@ import CollectionPage from '../collection/collection.component';
 
 
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchCollectionsStartAsync } from '../../redux/shop/shop.actions';
+import { fetchCollectionsStart } from '../../redux/shop/shop.actions';
 
 // import { firestore, convertCollectionsSnapshotToMap } from '../../firebase/firebase.utils';
 
@@ -21,7 +21,7 @@ const ShopPage: React.FC<RouteComponentProps> = ({ match }) => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(fetchCollectionsStartAsync());
+        dispatch(fetchCollectionsStart());
     }, [dispatch]);
 
     return (

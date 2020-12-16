@@ -7,21 +7,22 @@ import { ISignIn, SignDefault, ISignInProps } from '../../data-types/Form-types'
 import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
 
-import { auth, signInWithGoogle } from '../../firebase/firebase.utils';
+import { googleSignInStart, emailSignInStart } from '../../redux/user/user.actions';
+import { useDispatch } from 'react-redux';
 
 const SignIn: React.FC<ISignInProps> = ({ handleForm }) => {
     const [signInForm, setsignInForm] = useState<ISignIn>(SignDefault);
+    const dispatch = useDispatch();
+
+    const googleSignInStartAction = () => dispatch(googleSignInStart())
+    const emailSignInStartAction = (email: string, password: string) => dispatch(emailSignInStart({ email, password }))
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
         const { email, password } = signInForm;
 
-        try {
-            await auth.signInWithEmailAndPassword(email, password)
-        } catch (err) {
-            console.log(err)
-        }
+        emailSignInStartAction(email, password)
 
         setsignInForm({ ...SignDefault })
     }
@@ -58,7 +59,10 @@ const SignIn: React.FC<ISignInProps> = ({ handleForm }) => {
                     required />
                 <div className="buttons">
                     <CustomButton type="submit">Sign In</CustomButton>
-                    <CustomButton onClick={signInWithGoogle} isGoogleSignIn>
+                    <CustomButton
+                        type="button"
+                        onClick={googleSignInStartAction}
+                        isGoogleSignIn>
                         {' '}
                     Sign in with Google{' '}
                     </CustomButton>
