@@ -1,14 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { auth } from '../../firebase/firebase.utils';
 import CartIcon from '../cart-icon/cart-icon.component';
 import CartDropdown from '../cart-dropdown/cart-dropdown.component';
 
 import './header.styles.scss';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { setCurrentUser } from '../../redux/user/user.actions';
+import { signOutStart } from '../../redux/user/user.actions';
 import { RootState } from '../../redux/root-reducer';
 
 
@@ -17,6 +16,9 @@ const Header: React.FC = () => {
     const hiddenCart = useSelector((state: RootState) => state.cart.hidden);
     const dispatch = useDispatch();
 
+    const signOutAction = () => {
+        dispatch(signOutStart())
+    }
     return (
         <div className="header">
             <Link className="logo-container" to="/">
@@ -32,10 +34,7 @@ const Header: React.FC = () => {
                 {currentUser ?
                     <div
                         className="option"
-                        onClick={() => {
-                            auth.signOut()
-                            dispatch(setCurrentUser(null))
-                        }}>
+                        onClick={signOutAction}>
                         SIGN OUT
                     </div>
                     :

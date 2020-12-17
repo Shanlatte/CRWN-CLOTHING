@@ -8,10 +8,12 @@ import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
 
 import { googleSignInStart, emailSignInStart } from '../../redux/user/user.actions';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../redux/root-reducer';
 
 const SignIn: React.FC<ISignInProps> = ({ handleForm }) => {
     const [signInForm, setsignInForm] = useState<ISignIn>(SignDefault);
+    const errorMessage = useSelector((state: RootState) => state.user.error);
     const dispatch = useDispatch();
 
     const googleSignInStartAction = () => dispatch(googleSignInStart())
@@ -39,8 +41,7 @@ const SignIn: React.FC<ISignInProps> = ({ handleForm }) => {
 
             <span>Sign in with your email and password</span>
             <span onClick={handleForm} style={{ color: "blue", cursor: "pointer" }}>I do not have an account</span>
-
-
+            <span onClick={handleForm} style={{ color: "red", marginTop: "10px" }}>{errorMessage}</span>
             <form onSubmit={handleSubmit}>
                 <FormInput
                     name="email"

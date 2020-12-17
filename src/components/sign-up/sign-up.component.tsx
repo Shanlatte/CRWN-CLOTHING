@@ -3,19 +3,27 @@ import React from 'react';
 import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
 
-import { auth, createUserProfileDocument } from '../../firebase/firebase.utils';
-
 import './sign-up.styles.scss';
 
 import { ISignUp, SignUpDefault, ISignUpProps } from '../../data-types/Form-types'
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+
+import { signUpStart } from '../../redux/user/user.actions';
 
 const SignUp: React.FC<ISignUpProps> = ({ handleForm }) => {
     const [signUpForm, setSignUpForm] = useState<ISignUp>(SignUpDefault);
+    const dispatch = useDispatch();
+
+    const signUpStartAction = (email: string, password: string, displayName: string) => {
+        return (
+            dispatch(signUpStart({ email, password, displayName }))
+        )
+    }
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        
+
         const { email, displayName, password, confirmPassword } = signUpForm
 
         if (password !== confirmPassword) {
@@ -23,14 +31,7 @@ const SignUp: React.FC<ISignUpProps> = ({ handleForm }) => {
             return;
         }
 
-        try {
-            const { user } = await auth.createUserWithEmailAndPassword(email, password);
-            await createUserProfileDocument(user, { displayName });
-
-            setSignUpForm({ ...SignUpDefault })
-        } catch (err) {
-            console.error(err)
-        }
+        signUpStartAction(email, password, displayName)
     }
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -78,9 +79,7 @@ const SignUp: React.FC<ISignUpProps> = ({ handleForm }) => {
 
                 <div className="buttons">
                     <CustomButton type="submit">Sign Up</CustomButton>
-
                 </div>
-
             </form>
         </div>
     )

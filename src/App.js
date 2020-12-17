@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 // import { setCurrentUser } from './redux/user/user.actions';
 
 import './App.css';
@@ -13,27 +13,15 @@ import Header from './components/header/header.component';
 // import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 import SignInAndSignUpPage from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
 
+import { checkUserSession } from './redux/user/user.actions'
+
 function App() {
   const currentUser = useSelector(state => state.user.currentUser);
-  // var unsubscribeFromAuth = null;
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   useEffect(() => {
-
-    // unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
-    //   if (userAuth) {
-    //     const userRef = await createUserProfileDocument(userAuth);
-    //     userRef.onSnapshot(snapShot => {
-    //       dispatch(setCurrentUser({
-    //         id: snapShot.id,
-    //         ...snapShot.data()
-    //       }));
-    //     });
-    //   } else {
-    //     setCurrentUser(null);
-    //   }
-    // })
-  }, [])
+    dispatch(checkUserSession())
+  }, [dispatch])
 
   return (
     <div >
