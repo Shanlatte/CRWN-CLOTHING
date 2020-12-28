@@ -38,7 +38,7 @@ function App() {
               <Redirect to='/' />
             ) : (
                 <SignInAndSignUpPage />
-              )
+              ) 
           } />
       </Switch>
     </div>

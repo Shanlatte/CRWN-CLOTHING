@@ -25,8 +25,6 @@ const SignIn: React.FC<ISignInProps> = ({ handleForm }) => {
         const { email, password } = signInForm;
 
         emailSignInStartAction(email, password)
-
-        setsignInForm({ ...SignDefault })
     }
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
