@@ -10,7 +10,7 @@ const StripeCheckoutButton: React.FC<IStripeCheckout> = ({ price }) => {
 
     const onToken = (token: any) => {
         axios({
-            url: 'http://localhost:5000/payment',
+            url: 'payment',
             method: 'post',
             data: {
                 amount: priceForStripe,
