@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { lazy, useEffect, Suspense } from 'react';
 import { Route, RouteComponentProps } from 'react-router-dom';
 
 import CollectionsOverview from '../../components/collections-overview/collections-overview.component';
@@ -12,9 +12,13 @@ import { fetchCollectionsStart } from '../../redux/shop/shop.actions';
 
 import WithSpinner from '../../components/with-spinner/with-spinner.component';
 import { RootState } from '../../redux/root-reducer';
+import Spinner from '../../components/spinner/spinner.component';
 
-const CollectionOverviewWithSpinner = WithSpinner(CollectionsOverview);
-const CollectionPageWithSpinner = WithSpinner(CollectionPage);
+const CollectionOverviewWithSpinnerLazy = lazy(()=> import('../../components/collections-overview/collections-overview.component'))
+const CollectionPageWithSpinnerLazy = lazy(()=> import('../collection/collection.component'))
+
+const CollectionOverviewWithSpinner = WithSpinner(CollectionOverviewWithSpinnerLazy);
+const CollectionPageWithSpinner = WithSpinner(CollectionPageWithSpinnerLazy);
 
 const ShopPage: React.FC<RouteComponentProps> = ({ match }) => {
     const loading = useSelector((state: RootState) => state.shop.isFetching);
@@ -26,9 +30,11 @@ const ShopPage: React.FC<RouteComponentProps> = ({ match }) => {
 
     return (
         <div className="shop-page">
-            <Route exact path={`${match.path}`} render={(props) => <CollectionOverviewWithSpinner isLoading={loading} {...props} />} />
-            <Route path={`${match.path}/:collectionId`} render={(props) => <CollectionPageWithSpinner isLoading={loading} {...props} />} />
-        </div>
+            <Suspense fallback={<Spinner/>}>
+                <Route exact path={`${match.path}`} render={(props) => <CollectionOverviewWithSpinner isLoading={loading}  />} />
+                <Route path={`${match.path}/:collectionId`} render={(props) => <CollectionPageWithSpinner isLoading={loading}  {...props} />} />
+            </Suspense>
+             </div>
     )
 }
 
