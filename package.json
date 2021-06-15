@@ -14,6 +14,7 @@
         "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
     },
     "dependencies": {
+        "@heroku/buildpack-registry": "^1.0.1",
         "body-parser": "^1.18.3",
         "compression": "^1.7.4",
         "cors": "2.8.5",
